@@ -30,5 +30,3 @@ Configured in [`config/ormconfig.js`](./config/ormconfig.js) via `typeorm`; conn
 ## Deploy
 
 Zip `index.mjs`, `config/`, and `node_modules/` and upload as the Lambda's deployment package. Trigger via the SQS queue populated by `enqueueWebhookDataToSQS`.
-
-> **Note:** the stored-procedure call is built via template-literal string interpolation of webhook fields rather than parameterized query values. Worth switching to parameterized queries (`pg`/`typeorm` both support them) since the values originate from webhook payloads.

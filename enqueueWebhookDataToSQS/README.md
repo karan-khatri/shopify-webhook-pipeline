@@ -37,5 +37,3 @@ Entry point of the [Shopify webhook pipeline](../README.md). Receives a raw Shop
 ## Deploy
 
 Zip `index.mjs`, `service/`, and `node_modules/` and upload as the Lambda's deployment package (or `zip -r function.zip .` after `npm install --omit=dev`). Trigger via API Gateway.
-
-> **Note:** `index.mjs` calls `dayjs()` but does not currently `import dayjs from "dayjs"` at the top of the file, even though it's a listed dependency — worth verifying this isn't erroring in production.
