@@ -9,19 +9,19 @@ Shopify Webhook
       │
       ▼
 ┌─────────────────────────┐
-│ enqueueWebhookDataToSQS  │  API Gateway-triggered
-│  - gzip + archive to S3  │
-│  - push message to SQS   │
-└────────────┬─────────────┘
+│ enqueueWebhookDataToSQS │  API Gateway-triggered
+│  - gzip + archive to S3 │
+│  - push message to SQS  │
+└────────────┬────────────┘
              │  (SQS FIFO queue)
              ├─────────────────────────────┐
              ▼                             ▼
-┌───────────────────────────┐   ┌──────────────────────────┐
-│ populateCustomerDataToDb   │   │ populateProductsDataToDB  │
-│  - SQS-triggered           │   │  - SQS-triggered          │
-│  - upserts customer data   │   │  - matches tenant tags,   │
-│    via stored procedure    │   │    upserts product/variant│
-└───────────────────────────┘   └──────────────────────────┘
+┌───────────────────────────┐   ┌────────────────────────────┐
+│ populateCustomerDataToDb  │   │ populateProductsDataToDB   │
+│  - SQS-triggered          │   │  - SQS-triggered           │
+│  - upserts customer data  │   │  - matches tenant tags,    │
+│    via stored procedure   │   │    upserts product/variant │
+└───────────────────────────┘   └────────────────────────────┘
 ```
 
 Each Shopify webhook (e.g. `customers/update`, `products/update`) hits the same entry Lambda, which archives the raw payload to S3 (partitioned by shop domain / topic / date) and forwards it to SQS. The two downstream Lambdas are triggered by SQS and route on webhook topic to update the appropriate tables via Postgres stored procedures.
