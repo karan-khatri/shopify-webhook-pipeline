@@ -1,0 +1,8 @@
+{
+  "type":"module",
+  "dependencies": {
+    "dayjs": "^1.11.10",
+    "uuid": "^9.0.1",
+    "zlib": "^1.0.5"
+  }
+}

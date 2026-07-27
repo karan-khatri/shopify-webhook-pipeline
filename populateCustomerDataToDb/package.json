@@ -1,0 +1,18 @@
+{
+  "name": "populateproductwebhookdatatodbands3",
+  "version": "1.0.0",
+  "description": "Lambda Function to Populate Product Webhook Data to S3 and DB",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.3.1",
+    "pg": "^8.11.3",
+    "typeorm": "^0.3.17"
+  }
+}
